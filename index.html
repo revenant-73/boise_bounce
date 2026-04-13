@@ -18,32 +18,67 @@
         .flyer-shadow {
             box-shadow: 0 20px 50px rgba(0,0,0,0.15);
         }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900" x-data="{ mobileMenuOpen: false }">
+<body class="bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900" 
+      x-data="{ mobileMenuOpen: false, scrolled: false }"
+      @scroll.window="scrolled = window.pageYOffset > 100">
+
+    <!-- Mobile Sticky CTA -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] md:hidden w-[90%] transition-all duration-300"
+         x-show="scrolled"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 translate-y-10"
+         x-transition:enter-end="opacity-100 -translate-y-0">
+        <a href="https://volleyballlife.com/event/36331" target="_blank" 
+           class="block w-full bg-blue-700 text-white text-center py-4 rounded-2xl font-black shadow-2xl shadow-blue-900/40 ring-4 ring-white/10 active:scale-95 transition">
+            REGISTER NOW
+        </a>
+    </div>
 
     <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+    <nav class="sticky top-0 z-50 transition-all duration-300"
+         :class="scrolled ? 'bg-white/90 backdrop-blur-md border-b border-gray-100 py-2' : 'bg-transparent py-4'">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
+            <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center">
-                    <a href="#" class="text-2xl font-black text-blue-800 tracking-tighter uppercase italic flex items-center gap-2">
-                        <span class="bg-blue-600 text-white px-2 py-0.5 rounded">B</span>OISE BOUNCE
+                    <a href="#" class="text-2xl font-black tracking-tighter uppercase italic flex items-center gap-2 transition-colors duration-300"
+                       :class="scrolled ? 'text-blue-800' : 'text-white'">
+                        <span class="bg-blue-600 text-white px-2 py-0.5 rounded shadow-lg shadow-blue-600/20">B</span>OISE BOUNCE
                     </a>
                 </div>
                 
                 <!-- Desktop Nav -->
                 <div class="hidden md:flex space-x-10 items-center">
-                    <a href="#info" class="text-sm font-semibold text-gray-500 hover:text-blue-600 transition uppercase tracking-wider">Information</a>
-                    <a href="#gallery" class="text-sm font-semibold text-gray-500 hover:text-blue-600 transition uppercase tracking-wider">Gallery</a>
-                    <a href="#divisions" class="text-sm font-semibold text-gray-500 hover:text-blue-600 transition uppercase tracking-wider">Divisions</a>
-                    <a href="#location" class="text-sm font-semibold text-gray-500 hover:text-blue-600 transition uppercase tracking-wider">Location</a>
-                    <a href="https://volleyballlife.com/event/36331" target="_blank" class="bg-blue-700 text-white px-7 py-3 rounded-xl text-sm font-bold hover:bg-blue-800 transition shadow-lg shadow-blue-900/20 active:scale-95">Register Now</a>
+                    <a href="#info" class="text-xs font-bold transition uppercase tracking-widest"
+                       :class="scrolled ? 'text-slate-500 hover:text-blue-600' : 'text-white/80 hover:text-white'">Information</a>
+                    <a href="#gallery" class="text-xs font-bold transition uppercase tracking-widest"
+                       :class="scrolled ? 'text-slate-500 hover:text-blue-600' : 'text-white/80 hover:text-white'">Gallery</a>
+                    <a href="#divisions" class="text-xs font-bold transition uppercase tracking-widest"
+                       :class="scrolled ? 'text-slate-500 hover:text-blue-600' : 'text-white/80 hover:text-white'">Divisions</a>
+                    <a href="#location" class="text-xs font-bold transition uppercase tracking-widest"
+                       :class="scrolled ? 'text-slate-500 hover:text-blue-600' : 'text-white/80 hover:text-white'">Location</a>
+                    <a href="https://volleyballlife.com/event/36331" target="_blank" 
+                       class="px-7 py-3 rounded-xl text-sm font-bold transition shadow-lg active:scale-95"
+                       :class="scrolled ? 'bg-blue-700 text-white hover:bg-blue-800 shadow-blue-900/20' : 'bg-white text-blue-900 hover:bg-gray-100 shadow-white/10'">
+                       Register Now
+                    </a>
                 </div>
 
                 <!-- Mobile menu button -->
                 <div class="md:hidden">
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 hover:text-blue-600 focus:outline-none p-2">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" 
+                            class="focus:outline-none p-2 transition-colors duration-300"
+                            :class="scrolled ? 'text-slate-600' : 'text-white'">
                         <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                             <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -88,22 +123,22 @@
     </section>
 
     <!-- Highlights -->
-    <section id="info" class="py-20 bg-white">
+    <section id="info" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-12 text-center">
-                <div class="p-8 rounded-2xl bg-blue-50/50 border border-blue-100">
-                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg shadow-blue-200">🏆</div>
-                    <h3 class="text-2xl font-bold mb-3 text-blue-900">$4,000+ Prize Pool</h3>
-                    <p class="text-slate-600 leading-relaxed">Minimum open prize pool for our top competitors. Bring your A-game!</p>
+                <div class="reveal p-8 rounded-3xl bg-blue-50/50 border border-blue-100 hover:shadow-xl transition duration-500">
+                    <div class="w-20 h-20 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-8 text-3xl shadow-xl shadow-blue-200">🏆</div>
+                    <h3 class="text-2xl font-black mb-4 text-blue-900 italic uppercase">Prize Pool</h3>
+                    <p class="text-slate-600 leading-relaxed">$4,000 minimum open prize pool for our top competitors.</p>
                 </div>
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
-                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg shadow-blue-200">📅</div>
-                    <h3 class="text-2xl font-bold mb-3 text-slate-900">June 13 & 14</h3>
-                    <p class="text-slate-600 leading-relaxed">Join us for two action-packed days starting at 12:00 P.M. each day.</p>
+                <div class="reveal p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl transition duration-500" style="transition-delay: 100ms">
+                    <div class="w-20 h-20 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-8 text-3xl shadow-xl shadow-blue-200">📅</div>
+                    <h3 class="text-2xl font-black mb-4 text-slate-900 italic uppercase">June 13-14</h3>
+                    <p class="text-slate-600 leading-relaxed">Two days of intense competition starting at 12:00 P.M. daily.</p>
                 </div>
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
-                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg shadow-blue-200">📍</div>
-                    <h3 class="text-2xl font-bold mb-3 text-slate-900">Heroes Park</h3>
+                <div class="reveal p-8 rounded-3xl bg-slate-50 border border-slate-100 hover:shadow-xl transition duration-500" style="transition-delay: 200ms">
+                    <div class="w-20 h-20 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-8 text-3xl shadow-xl shadow-blue-200">📍</div>
+                    <h3 class="text-2xl font-black mb-4 text-slate-900 italic uppercase">Heroes Park</h3>
                     <p class="text-slate-600 leading-relaxed">The premier grass volleyball venue in Meridian, Idaho.</p>
                 </div>
             </div>
@@ -112,24 +147,27 @@
 
     <!-- Flyer Section -->
     <section class="py-24 bg-slate-50 overflow-hidden">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-16">
-                <div class="lg:w-1/2">
-                    <h2 class="text-4xl font-black text-blue-900 mb-8 uppercase italic leading-tight">Official Event <span class="text-blue-600">Flyer</span></h2>
-                    <div class="space-y-6 text-lg text-slate-600">
-                        <p>Get all the details at a glance. Our tournament features a massive $4,000 minimum open prize pool and divisions for all skill levels.</p>
-                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                            <p class="font-bold text-blue-800 mb-2 italic">Presented By</p>
-                            <p class="text-2xl font-black text-slate-900 italic tracking-tighter">IDAHO STRIKE BOYS VOLLEYBALL</p>
+                <div class="lg:w-1/2 reveal">
+                    <h2 class="text-5xl font-black text-blue-900 mb-8 uppercase italic leading-tight tracking-tighter">Official Event <span class="text-blue-600">Flyer</span></h2>
+                    <div class="space-y-8 text-lg text-slate-600">
+                        <p class="leading-relaxed">Get all the details at a glance. Our tournament features a massive prize pool and divisions for all skill levels.</p>
+                        <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
+                            <div class="absolute top-0 left-0 w-2 h-full bg-blue-600"></div>
+                            <p class="font-bold text-blue-800 mb-2 italic uppercase tracking-widest text-sm">Presented By</p>
+                            <p class="text-3xl font-black text-slate-900 italic tracking-tighter uppercase">Idaho Strike</p>
+                            <p class="text-slate-500 font-medium">Boys Volleyball</p>
                         </div>
-                        <a href="https://volleyballlife.com/event/36331" target="_blank" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue-700 transition shadow-xl shadow-blue-200">
-                            Download Flyer & Info
+                        <a href="https://volleyballlife.com/event/36331" target="_blank" class="inline-flex items-center gap-3 bg-blue-600 text-white px-10 py-5 rounded-2xl text-lg font-black hover:bg-blue-700 transition shadow-2xl shadow-blue-200 group active:scale-95">
+                            Download Info
+                            <svg class="w-6 h-6 group-hover:translate-x-1 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                         </a>
                     </div>
                 </div>
-                <div class="lg:w-1/2 w-full relative group">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-                    <img src="assets/boise_bounce.png" alt="Boise Bounce Flyer" class="relative rounded-2xl flyer-shadow w-full transform group-hover:scale-[1.02] transition duration-500">
+                <div class="lg:w-1/2 w-full relative group reveal" style="transition-delay: 200ms">
+                    <div class="absolute -inset-4 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-[3rem] blur-2xl opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+                    <img src="assets/boise_bounce.png" alt="Boise Bounce Flyer" class="relative rounded-3xl flyer-shadow w-full transform group-hover:scale-[1.01] transition duration-700">
                 </div>
             </div>
         </div>
@@ -138,98 +176,115 @@
     <!-- Action Gallery -->
     <section id="gallery" class="py-24 bg-white overflow-hidden">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-black text-blue-900 mb-4 uppercase italic tracking-tight">Tournament <span class="text-blue-600">Action</span></h2>
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-5xl font-black text-blue-900 mb-6 uppercase italic tracking-tighter">Tournament <span class="text-blue-600">Action</span></h2>
                 <p class="text-slate-500 text-lg max-w-2xl mx-auto">Experience the intensity and community of Boise's premier grass volleyball event.</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg">
-                    <img src="assets/boise_bounce_1.jpg" alt="Tournament Action Shot 1" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="reveal relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg">
+                    <img src="assets/boise_bounce_1.jpg" alt="Tournament Action 1" class="absolute inset-0 w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
                 </div>
-                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg">
-                    <img src="assets/boise_bounce_2.jpg" alt="Tournament Action Shot 2" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                <div class="reveal relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg" style="transition-delay: 100ms">
+                    <img src="assets/boise_bounce_2.jpg" alt="Tournament Action 2" class="absolute inset-0 w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
                 </div>
-                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg">
-                    <img src="assets/boise_bounce_3.png" alt="Tournament Action Shot 3" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                <div class="reveal relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg" style="transition-delay: 200ms">
+                    <img src="assets/boise_bounce_3.png" alt="Tournament Action 3" class="absolute inset-0 w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
                 </div>
-                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg">
-                    <img src="assets/boise_bounce_4.png" alt="Tournament Action Shot 4" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                <div class="reveal relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg lg:col-span-2" style="transition-delay: 300ms">
+                    <img src="assets/boise_bounce_4.png" alt="Tournament Action 4" class="absolute inset-0 w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
                 </div>
-                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg lg:col-span-1 md:col-span-2">
-                    <img src="assets/boise_bounce_5.png" alt="Tournament Action Shot 5" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
-                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                <div class="reveal relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg" style="transition-delay: 400ms">
+                    <img src="assets/boise_bounce_5.png" alt="Tournament Action 5" class="absolute inset-0 w-full h-full object-cover transition duration-1000 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Divisions -->
-    <section id="divisions" class="py-20 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-black text-blue-900 mb-4 uppercase italic">Tournament Divisions</h2>
-                <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
+    <section id="divisions" class="py-24 bg-slate-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 reveal">
+                <h2 class="text-5xl font-black text-blue-900 mb-6 uppercase italic tracking-tighter">Divisions</h2>
+                <div class="w-24 h-2 bg-blue-600 mx-auto rounded-full"></div>
             </div>
             
-            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
-                <div class="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-100">
-                    <div class="p-10">
-                        <h4 class="text-blue-600 font-bold uppercase tracking-widest text-sm mb-6">Open Divisions</h4>
-                        <ul class="space-y-6">
-                            <li class="flex justify-between items-center">
-                                <span class="text-xl font-bold">Men's Open</span>
-                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">$80</span>
+            <div class="reveal bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-slate-200">
+                <div class="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-100">
+                    <div class="p-12 hover:bg-slate-50/50 transition">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center font-black text-xl">1</div>
+                            <h4 class="text-blue-900 font-black uppercase tracking-widest text-sm">Open Divisions</h4>
+                        </div>
+                        <ul class="space-y-8">
+                            <li class="flex justify-between items-center group">
+                                <span class="text-2xl font-bold text-slate-700 group-hover:text-blue-700 transition">Men's Open</span>
+                                <span class="bg-blue-600 text-white px-5 py-2 rounded-2xl font-black text-xl shadow-lg shadow-blue-200">$80</span>
                             </li>
-                            <li class="flex justify-between items-center">
-                                <span class="text-xl font-bold">Women's Open</span>
-                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">$80</span>
+                            <li class="flex justify-between items-center group">
+                                <span class="text-2xl font-bold text-slate-700 group-hover:text-blue-700 transition">Women's Open</span>
+                                <span class="bg-blue-600 text-white px-5 py-2 rounded-2xl font-black text-xl shadow-lg shadow-blue-200">$80</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="p-10">
-                        <h4 class="text-blue-600 font-bold uppercase tracking-widest text-sm mb-6">A Divisions</h4>
-                        <ul class="space-y-6">
-                            <li class="flex justify-between items-center">
-                                <span class="text-xl font-bold">Men's A</span>
-                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">$60</span>
+                    <div class="p-12 hover:bg-slate-50/50 transition">
+                        <div class="flex items-center gap-4 mb-8">
+                            <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center font-black text-xl">2</div>
+                            <h4 class="text-blue-900 font-black uppercase tracking-widest text-sm">A Divisions</h4>
+                        </div>
+                        <ul class="space-y-8">
+                            <li class="flex justify-between items-center group">
+                                <span class="text-2xl font-bold text-slate-700 group-hover:text-blue-700 transition">Men's A</span>
+                                <span class="bg-blue-50 text-blue-700 px-5 py-2 rounded-2xl font-black text-xl border border-blue-100">$60</span>
                             </li>
-                            <li class="flex justify-between items-center">
-                                <span class="text-xl font-bold">Women's A</span>
-                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">$60</span>
+                            <li class="flex justify-between items-center group">
+                                <span class="text-2xl font-bold text-slate-700 group-hover:text-blue-700 transition">Women's A</span>
+                                <span class="bg-blue-50 text-blue-700 px-5 py-2 rounded-2xl font-black text-xl border border-blue-100">$60</span>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="bg-blue-900 p-6 text-center text-white">
-                    <p class="font-bold">* Early bird registration ends May 1st *</p>
+                <div class="bg-blue-900 p-8 text-center">
+                    <p class="text-blue-200 font-bold tracking-widest uppercase text-sm italic animate-pulse">
+                        Early bird registration ends May 1st
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Location -->
-    <section id="location" class="py-20 bg-white">
+    <section id="location" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row items-center gap-16">
-                <div class="md:w-1/2">
-                    <h2 class="text-4xl font-black text-blue-900 mb-6 uppercase italic">The Venue</h2>
-                    <p class="text-xl font-bold text-gray-800 mb-2">Heroes Park</p>
-                    <p class="text-gray-600 mb-8 text-lg leading-relaxed">
-                        3064 W Malta Dr<br>
-                        Meridian, ID 83646
-                    </p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Heroes+Park+3064+W+Malta+Dr+Meridian+ID" target="_blank" class="inline-flex items-center text-blue-600 font-bold hover:underline">
+            <div class="flex flex-col lg:flex-row items-center gap-20">
+                <div class="lg:w-1/2 reveal">
+                    <h2 class="text-5xl font-black text-blue-900 mb-10 uppercase italic tracking-tighter">The Venue</h2>
+                    <div class="space-y-8 mb-12">
+                        <div class="flex gap-6 items-start">
+                            <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center shrink-0 shadow-sm border border-blue-100">
+                                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-2xl font-black text-slate-900 mb-2 uppercase italic tracking-tight">Heroes Park</p>
+                                <p class="text-xl text-slate-500 leading-relaxed">
+                                    3064 W Malta Dr<br>
+                                    Meridian, ID 83646
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Heroes+Park+3064+W+Malta+Dr+Meridian+ID" target="_blank" class="inline-flex items-center gap-3 text-blue-600 font-black text-lg uppercase tracking-widest hover:text-blue-800 transition group">
                         Get Directions
-                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        <svg class="w-6 h-6 group-hover:translate-x-2 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                     </a>
                 </div>
-                <div class="md:w-1/2 w-full h-80 rounded-3xl overflow-hidden shadow-2xl relative group">
-                    <img src="assets/heroes_park.jpg" alt="Heroes Park Venue" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                <div class="lg:w-1/2 w-full h-[500px] rounded-[3rem] overflow-hidden shadow-2xl relative group reveal" style="transition-delay: 200ms">
+                    <img src="assets/heroes_park.jpg" alt="Heroes Park Venue" class="absolute inset-0 w-full h-full object-cover transition duration-1000 group-hover:scale-105">
                     <div class="absolute inset-0 bg-blue-900/10 group-hover:bg-transparent transition duration-500"></div>
                 </div>
             </div>
@@ -237,30 +292,49 @@
     </section>
 
     <!-- Call to Action -->
-    <section class="py-24 bg-blue-900 text-white">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h2 class="text-4xl md:text-5xl font-black mb-8 uppercase italic">Ready to Play?</h2>
-            <p class="text-xl mb-12 opacity-80">Don't miss out on the Second Annual Boise Bounce. Secure your spot before the early bird deadline!</p>
-            <a href="https://volleyballlife.com/event/36331" target="_blank" class="inline-block bg-white text-blue-900 px-12 py-5 rounded-2xl text-xl font-black hover:bg-gray-100 transition shadow-2xl">
+    <section class="py-32 bg-blue-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-blue-600 rounded-full blur-[120px] opacity-20 -mr-48 -mt-48"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-400 rounded-full blur-[120px] opacity-10 -ml-48 -mb-48"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10 reveal">
+            <h2 class="text-5xl md:text-7xl font-black mb-10 uppercase italic tracking-tighter">Ready to Play?</h2>
+            <p class="text-xl md:text-2xl mb-14 text-blue-100 font-medium">Don't miss out on the Second Annual Boise Bounce. Secure your spot before the early bird deadline!</p>
+            <a href="https://volleyballlife.com/event/36331" target="_blank" class="inline-block bg-white text-blue-900 px-16 py-6 rounded-[2rem] text-2xl font-black hover:bg-blue-50 transition shadow-2xl hover:scale-105 active:scale-95 duration-300">
                 Register on Volleyball Life
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 bg-gray-900 text-gray-400 border-t border-gray-800">
+    <footer class="py-20 bg-slate-900 text-slate-400 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="mb-8">
-                <span class="text-2xl font-black text-white italic uppercase tracking-tighter">Boise Bounce</span>
+            <div class="mb-12 reveal">
+                <span class="text-3xl font-black text-white italic uppercase tracking-tighter">Boise Bounce</span>
             </div>
-            <p class="mb-4">Presented by <span class="text-white font-semibold">Idaho Strike Boys Volleyball</span></p>
-            <p class="text-sm">© 2026 Boise Bounce Volleyball. All rights reserved.</p>
-            <div class="mt-8 flex justify-center space-x-6 text-sm">
-                <a href="https://www.boisebouncevolleyball.com" class="hover:text-white transition">boisebouncevolleyball.com</a>
-                <a href="https://volleyballlife.com/event/36331" class="hover:text-white transition">Event Registration</a>
+            <p class="mb-4 text-lg">Presented by <span class="text-white font-black italic tracking-tight">IDAHO STRIKE BOYS VOLLEYBALL</span></p>
+            <p class="text-sm uppercase tracking-[0.3em] font-bold opacity-50">© 2026 Boise Bounce Volleyball</p>
+            <div class="mt-12 flex flex-wrap justify-center gap-x-12 gap-y-6 text-xs font-bold uppercase tracking-widest">
+                <a href="https://www.boisebouncevolleyball.com" class="text-slate-500 hover:text-white transition">Website</a>
+                <a href="https://volleyballlife.com/event/36331" class="text-slate-500 hover:text-white transition">Registration</a>
+                <a href="#info" class="text-slate-500 hover:text-white transition">Tournament Info</a>
             </div>
         </div>
     </footer>
 
+    <script>
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>
