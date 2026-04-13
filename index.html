@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boise Bounce | Grass Volleyball Tournament</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; }
+        .hero-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.8)), url('https://images.unsplash.com/photo-1612872086822-48745b37597b?auto=format&fit=crop&q=80&w=2000');
+            background-size: cover;
+            background-position: center;
+        }
+        .flyer-shadow {
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-900" x-data="{ mobileMenuOpen: false }">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-black text-blue-800 tracking-tighter uppercase italic flex items-center gap-2">
+                        <span class="bg-blue-600 text-white px-2 py-0.5 rounded">B</span>OISE BOUNCE
+                    </a>
+                </div>
+                
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex space-x-10 items-center">
+                    <a href="#info" class="text-sm font-semibold text-gray-500 hover:text-blue-600 transition uppercase tracking-wider">Information</a>
+                    <a href="#gallery" class="text-sm font-semibold text-gray-500 hover:text-blue-600 transition uppercase tracking-wider">Gallery</a>
+                    <a href="#divisions" class="text-sm font-semibold text-gray-500 hover:text-blue-600 transition uppercase tracking-wider">Divisions</a>
+                    <a href="#location" class="text-sm font-semibold text-gray-500 hover:text-blue-600 transition uppercase tracking-wider">Location</a>
+                    <a href="https://volleyballlife.com/event/36331" target="_blank" class="bg-blue-700 text-white px-7 py-3 rounded-xl text-sm font-bold hover:bg-blue-800 transition shadow-lg shadow-blue-900/20 active:scale-95">Register Now</a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 hover:text-blue-600 focus:outline-none p-2">
+                        <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Nav Overlay -->
+        <div x-show="mobileMenuOpen" 
+             x-transition:enter="transition ease-out duration-200"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             class="md:hidden bg-white border-b border-gray-100 absolute w-full shadow-2xl">
+            <div class="px-4 pt-2 pb-6 space-y-1">
+                <a @click="mobileMenuOpen = false" href="#info" class="block px-3 py-4 text-lg font-bold text-gray-900 border-b border-gray-50">Information</a>
+                <a @click="mobileMenuOpen = false" href="#gallery" class="block px-3 py-4 text-lg font-bold text-gray-900 border-b border-gray-50">Gallery</a>
+                <a @click="mobileMenuOpen = false" href="#divisions" class="block px-3 py-4 text-lg font-bold text-gray-900 border-b border-gray-50">Divisions</a>
+                <a @click="mobileMenuOpen = false" href="#location" class="block px-3 py-4 text-lg font-bold text-gray-900 border-b border-gray-50">Location</a>
+                <a @click="mobileMenuOpen = false" href="https://volleyballlife.com/event/36331" target="_blank" class="block w-full text-center mt-6 bg-blue-700 text-white px-3 py-4 rounded-xl font-black">Register on Volleyball Life</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-[80vh] flex items-center justify-center text-white overflow-hidden">
+        <div class="absolute inset-0 hero-bg"></div>
+        <div class="relative z-10 text-center px-4 max-w-4xl">
+            <p class="text-blue-400 font-bold uppercase tracking-[0.2em] mb-4">Second Annual</p>
+            <h1 class="text-6xl md:text-8xl font-black mb-6 tracking-tight italic uppercase">Boise Bounce</h1>
+            <p class="text-xl md:text-2xl font-light mb-8 opacity-90">Grass Volleyball Tournament | June 13 & 14, 2026</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://volleyballlife.com/event/36331" target="_blank" class="bg-white text-blue-900 px-8 py-4 rounded-xl text-lg font-bold hover:bg-gray-100 transition shadow-xl">
+                    Register on Volleyball Life
+                </a>
+                <a href="#info" class="bg-blue-600/20 backdrop-blur-sm border-2 border-white/30 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-white/10 transition">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Highlights -->
+    <section id="info" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-12 text-center">
+                <div class="p-8 rounded-2xl bg-blue-50/50 border border-blue-100">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg shadow-blue-200">🏆</div>
+                    <h3 class="text-2xl font-bold mb-3 text-blue-900">$4,000+ Prize Pool</h3>
+                    <p class="text-slate-600 leading-relaxed">Minimum open prize pool for our top competitors. Bring your A-game!</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg shadow-blue-200">📅</div>
+                    <h3 class="text-2xl font-bold mb-3 text-slate-900">June 13 & 14</h3>
+                    <p class="text-slate-600 leading-relaxed">Join us for two action-packed days starting at 12:00 P.M. each day.</p>
+                </div>
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg shadow-blue-200">📍</div>
+                    <h3 class="text-2xl font-bold mb-3 text-slate-900">Heroes Park</h3>
+                    <p class="text-slate-600 leading-relaxed">The premier grass volleyball venue in Meridian, Idaho.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Flyer Section -->
+    <section class="py-24 bg-slate-50 overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <div class="lg:w-1/2">
+                    <h2 class="text-4xl font-black text-blue-900 mb-8 uppercase italic leading-tight">Official Event <span class="text-blue-600">Flyer</span></h2>
+                    <div class="space-y-6 text-lg text-slate-600">
+                        <p>Get all the details at a glance. Our tournament features a massive $4,000 minimum open prize pool and divisions for all skill levels.</p>
+                        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                            <p class="font-bold text-blue-800 mb-2 italic">Presented By</p>
+                            <p class="text-2xl font-black text-slate-900 italic tracking-tighter">IDAHO STRIKE BOYS VOLLEYBALL</p>
+                        </div>
+                        <a href="https://volleyballlife.com/event/36331" target="_blank" class="inline-block bg-blue-600 text-white px-8 py-4 rounded-xl text-lg font-bold hover:bg-blue-700 transition shadow-xl shadow-blue-200">
+                            Download Flyer & Info
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 w-full relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+                    <img src="assets/boise_bounce.png" alt="Boise Bounce Flyer" class="relative rounded-2xl flyer-shadow w-full transform group-hover:scale-[1.02] transition duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Action Gallery -->
+    <section id="gallery" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-blue-900 mb-4 uppercase italic tracking-tight">Tournament <span class="text-blue-600">Action</span></h2>
+                <p class="text-slate-500 text-lg max-w-2xl mx-auto">Experience the intensity and community of Boise's premier grass volleyball event.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg">
+                    <img src="assets/boise_bounce_1.jpg" alt="Tournament Action Shot 1" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg">
+                    <img src="assets/boise_bounce_2.jpg" alt="Tournament Action Shot 2" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg">
+                    <img src="assets/boise_bounce_3.png" alt="Tournament Action Shot 3" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg">
+                    <img src="assets/boise_bounce_4.png" alt="Tournament Action Shot 4" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+                <div class="relative group overflow-hidden rounded-3xl bg-slate-100 aspect-[4/3] shadow-lg lg:col-span-1 md:col-span-2">
+                    <img src="assets/boise_bounce_5.png" alt="Tournament Action Shot 5" class="absolute inset-0 w-full h-full object-cover transition duration-700 group-hover:scale-110 group-hover:rotate-1">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition duration-500"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Divisions -->
+    <section id="divisions" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-black text-blue-900 mb-4 uppercase italic">Tournament Divisions</h2>
+                <div class="w-24 h-1 bg-blue-600 mx-auto"></div>
+            </div>
+            
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden border border-gray-200">
+                <div class="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+                    <div class="p-10">
+                        <h4 class="text-blue-600 font-bold uppercase tracking-widest text-sm mb-6">Open Divisions</h4>
+                        <ul class="space-y-6">
+                            <li class="flex justify-between items-center">
+                                <span class="text-xl font-bold">Men's Open</span>
+                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">$80</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span class="text-xl font-bold">Women's Open</span>
+                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">$80</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="p-10">
+                        <h4 class="text-blue-600 font-bold uppercase tracking-widest text-sm mb-6">A Divisions</h4>
+                        <ul class="space-y-6">
+                            <li class="flex justify-between items-center">
+                                <span class="text-xl font-bold">Men's A</span>
+                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">$60</span>
+                            </li>
+                            <li class="flex justify-between items-center">
+                                <span class="text-xl font-bold">Women's A</span>
+                                <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">$60</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="bg-blue-900 p-6 text-center text-white">
+                    <p class="font-bold">* Early bird registration ends May 1st *</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location -->
+    <section id="location" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center gap-16">
+                <div class="md:w-1/2">
+                    <h2 class="text-4xl font-black text-blue-900 mb-6 uppercase italic">The Venue</h2>
+                    <p class="text-xl font-bold text-gray-800 mb-2">Heroes Park</p>
+                    <p class="text-gray-600 mb-8 text-lg leading-relaxed">
+                        3064 W Malta Dr<br>
+                        Meridian, ID 83646
+                    </p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Heroes+Park+3064+W+Malta+Dr+Meridian+ID" target="_blank" class="inline-flex items-center text-blue-600 font-bold hover:underline">
+                        Get Directions
+                        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                </div>
+                <div class="md:w-1/2 w-full h-80 bg-gray-200 rounded-3xl overflow-hidden shadow-inner flex items-center justify-center text-gray-400">
+                    <p>Map View Placeholder</p>
+                    <!-- In a real deployment, a static map or iframe would go here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-24 bg-blue-900 text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-black mb-8 uppercase italic">Ready to Play?</h2>
+            <p class="text-xl mb-12 opacity-80">Don't miss out on the Second Annual Boise Bounce. Secure your spot before the early bird deadline!</p>
+            <a href="https://volleyballlife.com/event/36331" target="_blank" class="inline-block bg-white text-blue-900 px-12 py-5 rounded-2xl text-xl font-black hover:bg-gray-100 transition shadow-2xl">
+                Register on Volleyball Life
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900 text-gray-400 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="mb-8">
+                <span class="text-2xl font-black text-white italic uppercase tracking-tighter">Boise Bounce</span>
+            </div>
+            <p class="mb-4">Presented by <span class="text-white font-semibold">Idaho Strike Boys Volleyball</span></p>
+            <p class="text-sm">© 2026 Boise Bounce Volleyball. All rights reserved.</p>
+            <div class="mt-8 flex justify-center space-x-6 text-sm">
+                <a href="https://www.boisebouncevolleyball.com" class="hover:text-white transition">boisebouncevolleyball.com</a>
+                <a href="https://volleyballlife.com/event/36331" class="hover:text-white transition">Event Registration</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
